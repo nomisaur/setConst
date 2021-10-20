@@ -14,6 +14,8 @@ const compile = (inputCode) =>
         code.map((line) => {
           if (line.includes(`const ${variable} = `)) {
             return line.replace("const", "let");
+          } else if (line.includes(`${variable} = `)) {
+            return `throw(TypeError("Assignment to constant variable."));`;
           }
           if (line.includes("setConst(")) {
             return `${variable} = ${value}`;
